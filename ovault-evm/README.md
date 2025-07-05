@@ -16,12 +16,22 @@
   <a href="https://www.npmjs.com/package/@layerzerolabs/ovault-evm"><img alt="NPM License" src="https://img.shields.io/npm/l/@layerzerolabs/ovault-evm"/></a>
 </p>
 
-## Installation
+## Useful Commands
+From /ovault-evm
 
 ```bash
-pnpm install @layerzerolabs/ovault-evm
+npm install
 ```
 
 ```bash
-npm install @layerzerolabs/ovault-evm
+npm run compile
+```
+
+```bash
+npm test
+```
+
+
+```bash
+forge build
 ```
