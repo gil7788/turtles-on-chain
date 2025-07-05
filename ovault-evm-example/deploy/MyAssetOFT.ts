@@ -29,6 +29,7 @@ const deploy: DeployFunction = async (hre) => {
         ],
         log: true,
         skipIfAlreadyDeployed: true,
+        gasLimit: 3000000,
     })
 
     console.log(`Deployed contract: ${assetOFTContractName}, network: ${hre.network.name}, address: ${address}`)

@@ -4,14 +4,15 @@ set -e
 
 NETWORKS="hedera-mainnet,flare-mainnet"
 
+# Does flare requires OFT adapter
+echo "Deploying contracts via Hardhat LayerZero plugin..."
+npx hardhat lz:deploy --tags share --networks $NETWORKS --ci
+
 echo "Deploying contracts via Hardhat LayerZero plugin..."
 npx hardhat lz:deploy --tags asset --networks $NETWORKS --ci
 
-o "Deploying contracts via Hardhat LayerZero plugin..."
-npx hardhat lz:deploy --tags share --networks $NETWORKS --ci
-
-o "Deploying contracts via Hardhat LayerZero plugin..."
-npx hardhat lz:deploy --tags ovault --networks $NETWORKS --ci
+echo "Deploying contracts via Hardhat LayerZero plugin..."
+npx hardhat lz:deploy --tags ovault --networks flare-mainnet --ci
 
 
 echo "Wiring asset using LayerZero config..."
