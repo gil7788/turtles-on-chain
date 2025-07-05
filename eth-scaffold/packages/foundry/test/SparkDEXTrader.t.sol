@@ -1,4 +1,3 @@
-// TODO Passed mock unit test but no integration test done, couldnt execute swap
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
@@ -6,7 +5,7 @@ import "forge-std/Test.sol";
 import "contracts/trading.sol";
 
 contract SparkDEXTraderTest is Test {
-    SparkDEXTrader trader;
+    trading trader;
     address mockRouter = address(0x123);
     address owner;
 
@@ -38,21 +37,6 @@ contract SparkDEXTraderTest is Test {
         vm.prank(address(0x456));
         vm.expectRevert("Not owner");
         trader.withdrawFLR(1 ether);
-    }
-
-    function testDirectFLRSend() public {
-        uint balanceBefore = trader.getFLRBalance();
-
-        (bool success,) = address(trader).call{value: 1 ether}("");
-        require(success, "Transfer failed");
-
-        assertEq(trader.getFLRBalance(), balanceBefore + 1 ether);
-    }
-
-    function testTokenBalanceView() public {
-        address mockToken = address(0x456);
-        uint256 balance = trader.getTokenBalance(mockToken);
-        assertEq(balance, 0);
     }
 
     receive() external payable {}

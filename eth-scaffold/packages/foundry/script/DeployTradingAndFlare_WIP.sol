@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "forge-std/Script.sol";
-import "contracts/tradingAndFlare.sol";
+import "contracts/tradingAndFlare_WIP.sol";
 
 
 contract Deploy is Script {
