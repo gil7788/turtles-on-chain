@@ -6,7 +6,8 @@ import "contracts/flare.sol";
 
 // To test call
 /*
-cast send 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "updatePrice()" --rpc-url coston2 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+cast send 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "updatePrice()" --rpc-url coston2 --private-key $INSERT PK
+cast call 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "prices(uint256)" 0 --rpc-url coston2
 cast call 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "getCurrentPrice()" --rpc-url coston2
 cast call 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "getLatestPrice()" --rpc-url coston2
 cast call 0x103416cfCD0D0a32b904Ab4fb69dF6E5B5aaDf2b "getPriceCount()" --rpc-url coston2
