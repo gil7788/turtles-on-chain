@@ -1,6 +1,7 @@
 # Turtles On Chain!!
 
 ## Setup Ovalut
+### Installation
 cd to package:
 ```bash
 cd <repo_path>/ovault/ovault-evm
@@ -25,4 +26,9 @@ cd <repo>/ovault/ovault-evm-example
 
 ```bash
 npm link @layerzerolabs/ovault-evm
+```
+
+### Deployment
+```bash
+npx hardhat lz:deploy
 ```
