@@ -67,6 +67,16 @@ const config: HardhatUserConfig = {
             url: process.env.RPC_URL_BASE_SEPOLIA || 'https://sepolia.base.org',
             accounts,
         },
+        'flare-mainnet': {
+            eid: EndpointId.FLARE_V2_MAINNET,
+            url: "https://rpc.ankr.com/flare",
+            accounts,
+        },
+        'hedera-mainnet': {
+            eid: EndpointId.HEDERA_V2_MAINNET,
+            url: "https://mainnet.hashio.io/api",
+            accounts,
+        },
         hardhat: {
             // Need this for testing because TestHelperOz5.sol is exceeding the compiled contract size limit
             allowUnlimitedContractSize: true,

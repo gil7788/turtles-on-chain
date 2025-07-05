@@ -10,13 +10,14 @@ import type { OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
 //     contractName: 'MyAssetOFT',
 // }
 
-const arbitrumContract: OmniPointHardhat = {
-    eid: EndpointId.ARBSEP_V2_TESTNET.valueOf(),
+const flareContract: OmniPointHardhat = {
+    // eid: EndpointId.ARBSEP_V2_TESTNET.valueOf(),
+    eid: EndpointId.FLARE_V2_MAINNET,
     contractName: 'MyAssetOFT',
 }
 
-const baseContract: OmniPointHardhat = {
-    eid: EndpointId.BASESEP_V2_TESTNET.valueOf(),
+const hederaContract: OmniPointHardhat = {
+    eid: EndpointId.HEDERA_V2_MAINNET,
     contractName: 'MyAssetOFT',
 }
 
@@ -48,21 +49,21 @@ const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
 const pathways: TwoWayConfig[] = [
     // [
     //     optimismContract, // Chain A contract
-    //     arbitrumContract, // Chain C contract
+    //     flareContract, // Chain C contract
     //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
     //     [1, 1], // [A to B confirmations, B to A confirmations]
     //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
     // ],
     // [
     //     optimismContract, // Chain A contract
-    //     baseContract, // Chain C contract
+    //     hederaContract, // Chain C contract
     //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
     //     [1, 1], // [A to B confirmations, B to A confirmations]
     //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
     // ],
     [
-        arbitrumContract, // Chain A contract
-        baseContract, // Chain C contract
+        flareContract, // Chain A contract
+        hederaContract, // Chain C contract
         [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
         [1, 1], // [A to B confirmations, B to A confirmations]
         [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
@@ -74,7 +75,9 @@ export default async function () {
     const connections = await generateConnectionsConfig(pathways)
     return {
         // { contract: optimismContract },
-        contracts: [ { contract: arbitrumContract }, { contract: baseContract }],
+        contracts: [ { contract: flareContract }, { contract: hederaContract }],
         connections,
     }
 }
+
+// 0x9c061c9a4782294eef65ef28cb88233a987f4bdd
