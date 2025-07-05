@@ -5,10 +5,10 @@ import { OAppEnforcedOption } from '@layerzerolabs/toolbox-hardhat'
 
 import type { OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
 
-const optimismContract: OmniPointHardhat = {
-    eid: EndpointId.OPTSEP_V2_TESTNET.valueOf(),
-    contractName: 'MyShareOFT',
-}
+// const optimismContract: OmniPointHardhat = {
+//     eid: EndpointId.OPTSEP_V2_TESTNET.valueOf(),
+//     contractName: 'MyShareOFT',
+// }
 
 const arbitrumContract: OmniPointHardhat = {
     eid: EndpointId.ARBSEP_V2_TESTNET.valueOf(),
@@ -46,20 +46,20 @@ const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
 // With the config generator, pathways declared are automatically bidirectional
 // i.e. if you declare A,B there's no need to declare B,A
 const pathways: TwoWayConfig[] = [
-    [
-        optimismContract, // Chain A contract
-        arbitrumContract, // Chain C contract
-        [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
-        [1, 1], // [A to B confirmations, B to A confirmations]
-        [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
-    ],
-    [
-        optimismContract, // Chain A contract
-        baseContract, // Chain C contract
-        [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
-        [1, 1], // [A to B confirmations, B to A confirmations]
-        [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
-    ],
+    // [
+    //     optimismContract, // Chain A contract
+    //     arbitrumContract, // Chain C contract
+    //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
+    //     [1, 1], // [A to B confirmations, B to A confirmations]
+    //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
+    // ],
+    // [
+    //     optimismContract, // Chain A contract
+    //     baseContract, // Chain C contract
+    //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
+    //     [1, 1], // [A to B confirmations, B to A confirmations]
+    //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
+    // ],
     [
         arbitrumContract, // Chain A contract
         baseContract, // Chain C contract
@@ -73,7 +73,8 @@ export default async function () {
     // Generate the connections config based on the pathways
     const connections = await generateConnectionsConfig(pathways)
     return {
-        contracts: [{ contract: optimismContract }, { contract: arbitrumContract }, { contract: baseContract }],
+        // { contract: optimismContract }, 
+        contracts: [{ contract: arbitrumContract }, { contract: baseContract }],
         connections,
     }
 }

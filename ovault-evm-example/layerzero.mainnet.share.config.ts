@@ -7,21 +7,21 @@ import type { OmniPointHardhat } from '@layerzerolabs/toolbox-hardhat'
 
 // const optimismContract: OmniPointHardhat = {
 //     eid: EndpointId.OPTSEP_V2_TESTNET.valueOf(),
-//     contractName: 'MyAssetOFT',
+//     contractName: 'MyShareOFT',
 // }
 
-const arbitrumContract: OmniPointHardhat = {
-    eid: EndpointId.ARBSEP_V2_TESTNET.valueOf(),
-    contractName: 'MyAssetOFT',
+const flareContract: OmniPointHardhat = {
+    eid: EndpointId.FLARE_V2_MAINNET,
+    contractName: 'MyShareOFTAdapter',
 }
 
-const baseContract: OmniPointHardhat = {
-    eid: EndpointId.BASESEP_V2_TESTNET.valueOf(),
-    contractName: 'MyAssetOFT',
+const hederaContract: OmniPointHardhat = {
+    eid: EndpointId.HEDERA_V2_MAINNET,
+    contractName: 'MyShareOFT',
 }
 
 // To connect all the above chains to each other, we need the following pathways:
-// Optimism <-> Arb
+// Optimism <-> Arbitrum
 // Optimism <-> Base
 // Arbitrum <-> Base
 
@@ -48,21 +48,21 @@ const EVM_ENFORCED_OPTIONS: OAppEnforcedOption[] = [
 const pathways: TwoWayConfig[] = [
     // [
     //     optimismContract, // Chain A contract
-    //     arbitrumContract, // Chain C contract
+    //     flareContract, // Chain C contract
     //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
     //     [1, 1], // [A to B confirmations, B to A confirmations]
     //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
     // ],
     // [
     //     optimismContract, // Chain A contract
-    //     baseContract, // Chain C contract
+    //     hederaContract, // Chain C contract
     //     [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
     //     [1, 1], // [A to B confirmations, B to A confirmations]
     //     [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
     // ],
     [
-        arbitrumContract, // Chain A contract
-        baseContract, // Chain C contract
+        flareContract, // Chain A contract
+        hederaContract, // Chain C contract
         [['LayerZero Labs'], []], // [ requiredDVN[], [ optionalDVN[], threshold ] ]
         [1, 1], // [A to B confirmations, B to A confirmations]
         [EVM_ENFORCED_OPTIONS, EVM_ENFORCED_OPTIONS], // Chain C enforcedOptions, Chain A enforcedOptions
@@ -73,8 +73,8 @@ export default async function () {
     // Generate the connections config based on the pathways
     const connections = await generateConnectionsConfig(pathways)
     return {
-        // { contract: optimismContract },
-        contracts: [ { contract: arbitrumContract }, { contract: baseContract }],
+        // { contract: optimismContract }, 
+        contracts: [{ contract: flareContract }, { contract: hederaContract }],
         connections,
     }
 }

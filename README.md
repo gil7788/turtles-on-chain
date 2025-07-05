@@ -32,3 +32,8 @@ npm link @layerzerolabs/ovault-evm
 ```bash
 npx hardhat lz:deploy
 ```
+
+Wiring Transaction
+```bash
+pnpm hardhat lz:oapp:wire --oapp-config layerzero.asset.config.ts
+```
