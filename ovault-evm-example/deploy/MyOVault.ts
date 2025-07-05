@@ -51,6 +51,8 @@ const deploy: DeployFunction = async (hre) => {
         args: [ovaultAddress, assetOFTDeployment.address, shareOFTAdapterAddress],
         log: true,
         skipIfAlreadyDeployed: true,
+        gasLimit: 5000000,
+        // gasLimit: 1000000000,
     })
 
     console.log(`Deployed contract: ${composerContractName}, network: ${hre.network.name}, address: ${composerAddress}`)
