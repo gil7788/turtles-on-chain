@@ -54,10 +54,14 @@ contract SendScript is Script {
         chainIdToSrcEid[421614] = 40231; // arb sep
         chainIdToSrcEid[11155420] = 40232; // opt sep
         chainIdToSrcEid[84532] = 40245; // base sep
-
+        chainIdToSrcEid[295] = 30316; // Hedera
+        chainIdToSrcEid[14] = 30295;  // Flare
+        
         chainNameToDstEid["arb-sep"] = 40231; // arb sep
         chainNameToDstEid["opt-sep"] = 40232; // opt sep
         chainNameToDstEid["base-sep"] = 40245; // base sep
+        chainNameToDstEid["hedera-mainnet"] = 30316;  // Hedera
+        chainNameToDstEid["flare-mainnet"] = 30295;  // Flare
         chainNameToDstEid["bad-eid"] = 100000; // bad eid
 
         address_composer = payable(0xC629C57CFC8371819AB16963960E8c6FD497bb53);
@@ -73,6 +77,7 @@ contract SendScript is Script {
         uint128 _lzComposeValue
     ) public {
         uint32 srcEid = chainIdToSrcEid[block.chainid];
+        console.log("block.chainid: %s", block.chainid);
         if (srcEid == 0) {
             revert("Source chain is not Arbitrum Sepolia, Optimism Sepolia, or Base Sepolia");
         }
