@@ -10,11 +10,15 @@ import { IOFT, SendParam, OFTReceipt, MessagingReceipt, MessagingFee } from "@la
 import { Script, console } from "forge-std/Script.sol";
 import { OFT } from "@layerzerolabs/oft-evm/contracts/OFT.sol";
 import { OFTComposeMsgCodec } from "@layerzerolabs/oft-evm/contracts/libs/OFTComposeMsgCodec.sol";
+import { MyAssetOFT } from "../contracts/MyAssetOFT.sol";
+
+// forge script script/SendScript.s.sol   --rpc-url https://base-sepolia.drpc.org   --private-key eec5114d22861479be10c9db7850f75473bbcde37076163fbf94222a3864ee74   --sig "exec(address,string,uint256,uint256,uint128,uint128)"   0x815187F4CddE962a5afE5057b360E8fCa5bc4aa1   "arb-sep"   1ether   0   50000   0   --broadcast
 
 /**
  * @title Lets the user send an LZ OFT transfer to transfer an amount of OFT from a source EVM chain to OVault testnet or mainnet
  * @notice There are 3 supported modes that correspond to <amount>, <gas>, <value> in the forge script below:
- * @notice forge script script/SendScript.s.sol --private-key $PRIVATE_KEY --rpc-url $RPC_URL_BASE_TESTNET --sig "exec(address,string,uint256,uint256,uint128,uint128)" $SHARE_OFT_BASE_SEP  "base-sep" 1ether 0 50000 [--broadcast]
+ * @notice forge script script/SendScript.s.sol --private-key $PRIVATE_KEY --rpc-url $RPC_URL_BASE_TESTNET
+  --sig "exec(address,string,uint256,uint256,uint128,uint128)" $SHARE_OFT_BASE_SEP  "base-sep" 1ether 0 50000 [--broadcast]
 0  0.000025ether --broadcast
  * @notice 1. Send to HyperEVM 
                 - true, false, false
@@ -23,6 +27,15 @@ import { OFTComposeMsgCodec } from "@layerzerolabs/oft-evm/contracts/libs/OFTCom
  * @notice 3. Send to HyperCore + Fund HyperCore with HYPE 
                 - true, true, true
  */
+
+
+/*
+forge script script/SendScript.s.sol --rpc-url https://base-sepolia.drpc.org --private-key eec5114d22861479be10c9db7850f75473bbcde37076163fbf94222a3864ee74 --sig "exec(address,string,uint256,uint256,uint128,uint128)" 0xED4e1aCFbD615C834cC1Ea60E95D7dDd297422f9 "arb-sep" 1ether 0 0 0 0.000025ether --broadcast
+*/
+
+ /*
+ npx hardhat etherscan-verify --api-key UITCH99PJ8WH1T5K1Y3ZWQH9PZZ88M4R9P --api-url https://api.arbiscan.io --contract-name MyOFT --network arbitrum
+  */
 contract SendScript is Script {
     using AddressCast for address;
     using OptionsBuilder for bytes;
@@ -48,9 +61,10 @@ contract SendScript is Script {
         chainNameToDstEid["bad-eid"] = 100000; // bad eid
 
         address_composer = payable(0xC629C57CFC8371819AB16963960E8c6FD497bb53);
+        // address_composer = payable(0x9e5Db021D525BC465343Bcfe4e17BF36Ea96Ace7);
     }
 
-    function exec(
+   function exec(
         address _fromOFT,
         string memory _dstChain,
         uint256 _amount,
@@ -82,7 +96,11 @@ contract SendScript is Script {
 
         vm.startBroadcast();
 
+        // Mint tokens to msg.sender before sending
+        MyAssetOFT(_fromOFT).mint(msg.sender, _amount);
+
         MessagingFee memory msgFee = quoteSend(sendParam);
+        require(msgFee.nativeFee <= 0.0002 ether, "Fee exceeds 0.0002 ether cap");
 
         _send(sendParam, msgFee);
 

@@ -37,3 +37,11 @@ Wiring Transaction
 ```bash
 pnpm hardhat lz:oapp:wire --oapp-config layerzero.asset.config.ts
 ```
+
+```bash
+npx hardhat etherscan-verify --api-key UITCH99PJ8WH1T5K1Y3ZWQH9PZZ88M4R9P --api-url https://api-sepolia.arbiscan.io/ --contract-name MyOVaultComposer --network arbitrum-sepolia
+```
+
+```bash
+orge script script/SendScript.s.sol --rpc-url https://base-sepolia.drpc.org --private-key eec5114d22861479be10c9db7850f75473bbcde37076163fbf94222a3864ee74 --sig "exec(address,string,uint256,uint256,uint128,uint128)" 0x33457F5E32380AEFeac8A8eBF887E4608Eb6c3ca "arb-sep" 1ether 0 0 0 0.000025ether --broadcast
+```

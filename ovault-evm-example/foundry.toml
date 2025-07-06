@@ -30,5 +30,8 @@ remappings = [
     '@openzeppelin/=node_modules/@openzeppelin/',
 ]
 
+[rpc_endpoints]
+arbitrum-sepolia = "https://api.zan.top/arb-sepolia"
+
 [fuzz]
 runs = 1000
